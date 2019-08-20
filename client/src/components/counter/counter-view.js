@@ -6,6 +6,7 @@ const CounterView = (props) => (
     <p> {props.count}</p>
     <button type='button' onClick={() => props.increment(props.id)}> + </button>
     <button type='button' onClick={() => props.decrement(props.id, props.count)}> - </button>
+    <button onClick={() => props.delete(props.id)}> DELETE </button>
   </div>
 );
 

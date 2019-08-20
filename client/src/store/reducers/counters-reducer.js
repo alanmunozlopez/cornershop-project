@@ -4,7 +4,7 @@ import {
   DELETE_COUNTER,
   INCREMENT_COUNTER,
   DECREMENT_COUNTER
-} from '../actions/types';
+} from '../types/counters-types';
 
 const INITIAL_STATE = {};
 
@@ -15,7 +15,7 @@ export default ( state = INITIAL_STATE, action ) => {
     case CREATE_COUNTER:
       return { ...state , [action.payload.id]: action.payload};
     case DELETE_COUNTER:
-      return { ...state };
+      return  action.payload;
     case INCREMENT_COUNTER:
       return { ...state, [action.payload.id]: action.payload };
     case DECREMENT_COUNTER:

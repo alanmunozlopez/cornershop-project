@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as countersActions from '../../store/actions/countersActions';
+import * as actions from '../../store/actions';
 import CounterView from "../counter/counter-view";
 import CounterCreate from '../counter/counter-create';
 
@@ -21,29 +21,49 @@ class HomeContainer extends Component {
   };
 
   handleCreateCounter = () => {
-    this.props.createCounter('PABLO');
+    this.props.createCounter(this.props.modal.titleCounter);
+    this.handleCloseModalCreateCounter();
   };
   handleModalCreateCounter = () => {
+    this.props.modal.titleCounter = '';
+    this.props.onModal();
+  };
+  handleCloseModalCreateCounter = () => this.props.offModal();
 
+  handlePressEnter = (event) => {
+    if (event.key === 'Enter') {
+     this.handleCreateCounter();
+    }
   };
 
   render() {
+    console.log(this.props);
     return <section>
-      <CounterCreate
-        createCounter={this.handleCreateCounter}
-      />
+      {
+        !this.props.modal.isOpen ?
+        null :
+        <CounterCreate
+          createCounter={this.handleCreateCounter}
+          closeModal={this.handleCloseModalCreateCounter}
+          titleCounter={this.props.modal.titleCounter}
+          pressEnter={this.handlePressEnter}
+          updateTitleCounter={this.props.updateTitleCounter}
+        />
+      }
       <p> hey </p>
       <button onClick={this.handleModalCreateCounter}> CREATE COUNTER </button>
       {
-        this.props.counters ?
+        !this.props.counters ?
+        null :
         Object.keys(this.props.counters).map((key) => (
           <CounterView
             {...this.props.counters[key]}
             key={key}
             increment={this.handleIncrement}
             decrement={this.handleDecrement}
+            delete={this.props.deleteCounter}
           />
-        )) : null
+        ))
       }
     </section>;
   }
@@ -53,4 +73,4 @@ const mapStateToProps = (state) => {
   return state
 };
 
-export default connect(mapStateToProps, countersActions)(HomeContainer);
+export default connect(mapStateToProps, actions)(HomeContainer);

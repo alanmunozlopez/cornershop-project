@@ -5,12 +5,12 @@ import {
   DELETE_COUNTER,
   INCREMENT_COUNTER,
   DECREMENT_COUNTER
-} from './types';
+} from '../types/counters-types';
 
 const arrayToObject = (array) =>
   array.reduce((obj, item) => {
-    obj[item.id] = item
-    return obj
+    obj[item.id] = item;
+    return obj;
   }, {});
 
 const instance = axios.create({
@@ -38,13 +38,15 @@ export const createCounter = (title) => async (dispatch) => {
 };
 
 export const deleteCounter = (id) => async (dispatch) => {
-  const response = await instance.delete(
+  await instance.delete(
     'counter/',
     { data: {id} }
   );
+  const response = await instance.get('counters/');
+  console.log(response.data);
   dispatch({
     type: DELETE_COUNTER,
-    payload: response.data,
+    payload: arrayToObject(response.data),
   })
 };
 
