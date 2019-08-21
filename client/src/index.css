@@ -143,3 +143,8 @@ input:focus ~ .highlight
     width:0; background:transparent;
   }
 }
+
+.home-section {
+  max-width: 1440px;
+  margin: 0 auto;
+}

@@ -6,6 +6,7 @@ import CounterCreateModal from '../counter/counter-create-modal';
 import Counters from "../counter/counters";
 import FloatingButton from "../floating-button/floating-button";
 
+
 class HomeContainer extends Component {
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class HomeContainer extends Component {
   };
 
   render() {
-    return <section>
+    console.log(this.props);
+    return <section className='home-section'>
       {
         !this.props.modal.isOpen ?
         null :

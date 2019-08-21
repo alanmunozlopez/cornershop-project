@@ -3,10 +3,10 @@ import HomeContainer from './home/home-container';
 import Header from './header/header-view';
 
 const App = () => (
-  <span>
+  <div>
     <Header />
     <HomeContainer />
-  </span>
+  </div>
 );
 
 export default App;
