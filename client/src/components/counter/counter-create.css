@@ -20,7 +20,32 @@
 .counter-create-content {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 60px 280px 80px;
+  grid-gap: 8px;
+  justify-items: center;
+  border-radius: 5px;
+  padding: 16px;
   box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.29);
   background: #fff;
+}
+
+.counter-create-content h1 {
+  margin: 0 0 32px 0;
+}
+
+.counter-create-content-create {
+  padding: 16px;
+  color: white;
+  background: #FF0026;
+  border: solid 2px #FF0026;
+  width: 100%;
+  max-width: 250px;
+}
+
+.counter-create-content-cancel {
+  padding: 16px;
+  color: #000;
+  background: #FFF;
+  border: solid 2px #000;
+  width: 100%;
+  max-width: 250px;
 }

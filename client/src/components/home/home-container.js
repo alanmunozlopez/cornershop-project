@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/actions';
-import CounterView from "../counter/counter-view";
-import CounterCreate from '../counter/counter-create';
+import CounterCreateModal from '../counter/counter-create-modal';
+import Counters from "../counter/counters";
+import FloatingButton from "../floating-button/floating-button";
 
 class HomeContainer extends Component {
 
@@ -21,6 +22,9 @@ class HomeContainer extends Component {
   };
 
   handleCreateCounter = () => {
+    if(this.props.modal.titleCounter === '') {
+      return;
+    }
     this.props.createCounter(this.props.modal.titleCounter);
     this.handleCloseModalCreateCounter();
   };
@@ -37,12 +41,11 @@ class HomeContainer extends Component {
   };
 
   render() {
-    console.log(this.props);
     return <section>
       {
         !this.props.modal.isOpen ?
         null :
-        <CounterCreate
+        <CounterCreateModal
           createCounter={this.handleCreateCounter}
           closeModal={this.handleCloseModalCreateCounter}
           titleCounter={this.props.modal.titleCounter}
@@ -50,21 +53,19 @@ class HomeContainer extends Component {
           updateTitleCounter={this.props.updateTitleCounter}
         />
       }
-      <p> hey </p>
-      <button onClick={this.handleModalCreateCounter}> CREATE COUNTER </button>
       {
         !this.props.counters ?
         null :
-        Object.keys(this.props.counters).map((key) => (
-          <CounterView
-            {...this.props.counters[key]}
-            key={key}
-            increment={this.handleIncrement}
-            decrement={this.handleDecrement}
-            delete={this.props.deleteCounter}
-          />
-        ))
+        <Counters
+          counters={this.props.counters}
+          handleIncrement={this.handleIncrement}
+          handleDecrement={this.handleDecrement}
+          deleteCounter={this.props.deleteCounter}
+        />
       }
+      <FloatingButton
+        handleModalCreateCounter={this.handleModalCreateCounter}
+      />
     </section>;
   }
 }

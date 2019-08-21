@@ -43,7 +43,6 @@ export const deleteCounter = (id) => async (dispatch) => {
     { data: {id} }
   );
   const response = await instance.get('counters/');
-  console.log(response.data);
   dispatch({
     type: DELETE_COUNTER,
     payload: arrayToObject(response.data),
@@ -62,7 +61,6 @@ export const incrementCounter = (id) => async (dispatch) => {
 };
 
 export const decrementCounter = (id, actualCount) => async (dispatch) => {
-  console.log('kkk', id, actualCount);
   const response = await instance.post(
     'counter/dec/',
     {id}
